@@ -165,7 +165,7 @@ bool Tree::Erase(int x) {
     return true;
 }
 
-void menu()
+void main_menu()
 {
     system("cls");
     cout<<"1) Create a binary search Tree"<<endl;
@@ -173,4 +173,39 @@ void menu()
     cout<<"3) Individual task"<<endl;
     cout<<"4) Finish the program"<<endl;
     cout<<"Answer: ";
+}
+
+void menu_2() {
+
+}
+
+void menu_3() {
+
+}
+
+int main() {
+    Tree test;
+    int answer = 0;
+
+
+    while (true) {
+        main_menu();
+        cin >> answer;
+        if (answer == 1) {
+
+        }
+        if (answer == 2) {
+
+        }
+        if (answer == 3) {
+
+        }
+        if (answer == 4) {
+            return 0;
+        }
+        //добавить что бы не ломалось все
+        
+
+    }
+
 }
