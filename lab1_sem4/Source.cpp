@@ -192,7 +192,8 @@ void menu_3() {
 int main() {
     Tree test;
     int answer_main = 0;
-    int answer_1, answer_2, answer_3, answer_4, answer_5 = 0;
+    int answer_1 = 0;
+    int value = 0;
 
 
     while (true) {
@@ -202,12 +203,29 @@ int main() {
         if (answer_main == 1) {
             while (true) {
                 menu_2();
-                cin>> answer
+                cin >> answer_1;
+                if (answer_1 == 1) {
+                    cout << "Input value:" << endl;
+                    cin << value;
 
 
+                }
+                else if (answer_1 == 2) {
 
+                }
+                else if (answer_1 == 3) {
+
+                }
+                else if (answer_1 == 4) {
+
+                }
+                else if (answer_1 == 5) {
+
+                }
+                else{
+                    //не ломай
+                }
             }
-
         }
         if (answer_main == 2) {
 
