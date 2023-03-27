@@ -176,7 +176,13 @@ void main_menu()
 }
 
 void menu_2() {
-
+     system("cls");
+     cout<<"1) Add a Node"<<endl;
+     cout<<"2) Delete a Node"<<endl;
+     cout<<"3) Print a binary tree"<<endl;
+     cout<<"4) Find the Node"<<endl;
+     cout<<"5) Back"<< endl;
+     cout<<"Answer: ";
 }
 
 void menu_3() {
@@ -185,22 +191,31 @@ void menu_3() {
 
 int main() {
     Tree test;
-    int answer = 0;
+    int answer_main = 0;
+    int answer_1, answer_2, answer_3, answer_4, answer_5 = 0;
 
 
     while (true) {
         main_menu();
-        cin >> answer;
-        if (answer == 1) {
+        cin >> answer_main;
+
+        if (answer_main == 1) {
+            while (true) {
+                menu_2();
+                cin>> answer
+
+
+
+            }
 
         }
-        if (answer == 2) {
+        if (answer_main == 2) {
 
         }
-        if (answer == 3) {
+        if (answer_main == 3) {
 
         }
-        if (answer == 4) {
+        if (answer_main == 4) {
             return 0;
         }
         //добавить что бы не ломалось все
