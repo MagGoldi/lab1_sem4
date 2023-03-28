@@ -4,6 +4,8 @@
 #include <locale.h>
 #include <iostream>
 
+#include<vector>
+
 using namespace std;
 
 struct Node {
@@ -165,6 +167,16 @@ bool Tree::Erase(int x) {
     return true;
 }
 
+
+bool find_value(std::vector<int>& vector, int value) {
+    for (int i = 0; i < vector.size(); i++)
+    {
+        if (vector[i] == value)
+            return true;
+    }
+    return false;
+}
+
 void main_menu()
 {
     system("cls");
@@ -191,6 +203,7 @@ void menu_3() {
 
 int main() {
     Tree test;
+    Tree task;
     int answer_main = 0;
     int answer_1 = 0;
     int value = 0;
@@ -258,7 +271,27 @@ int main() {
 
         }
         if (answer_main == 3) {
+            std::vector<int> old_vector = { 2, 3, 3, 4, 5, 6, 5, 7 };
+            std::vector<int> new_vector;
+            cout << "vector: [";
+            for (int i = 0; i < old_vector.size(); i++)
+            {
+                if (find_value(new_vector, old_vector[i]) == false && task.Insert(old_vector[i]) == false)
+                {
+                    new_vector.push_back(old_vector[i]);
+                }
+                cout << old_vector[i] << ", ";
+            }
+            cout << "]" << endl;
 
+            cout << "new vector: [";
+            for (int i = 0; i < new_vector.size(); i++)
+            {
+                cout << new_vector[i] << ", ";
+            }
+            cout << "]" << endl;
+            system("pause");
+            f1 = true;
         }
         if (answer_main == 4) {
             return 0;
