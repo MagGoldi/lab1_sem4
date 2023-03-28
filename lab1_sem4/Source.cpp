@@ -36,16 +36,16 @@ private:
         }
     }
 
-    void Print_Node(const std::string & prefix, const Node * node, bool isLeft) {
-        if (node != nullptr){
+    void Print_Node(const std::string& prefix, const Node* node, bool isLeft) {
+        if (node != nullptr) {
             std::cout << prefix;
             std::cout << (isLeft ? "ГДД" : "АДД");
 
             std::cout << node->data << std::endl;
             Print_Node(prefix + (isLeft ? "|   " : "    "), node->left, true);
             Print_Node(prefix + (isLeft ? "|   " : "    "), node->right, false);
-            }
         }
+    }
 
     bool Insert_Node(Node*& Head, int val)
     {
@@ -64,16 +64,16 @@ private:
             return false;
     }
 
-    bool Contains_Node(const Node * head, int val){
+    bool Contains_Node(const Node* head, int val) {
         if (!head)
-           return false;
+            return false;
         else if (val < head->data)
-           return Contains_Node(head->left, val);
+            return Contains_Node(head->left, val);
         else if (val > head->data)
-           return Contains_Node(head->right, val);
+            return Contains_Node(head->right, val);
         else
-           return true;
-        
+            return true;
+
     }
 
     Node* Erase_Node(Node* Head, int val) {
@@ -168,21 +168,21 @@ bool Tree::Erase(int x) {
 void main_menu()
 {
     system("cls");
-    cout<<"1) Create a binary search Tree"<<endl;
-    cout<<"2) Calculate the average time"<<endl;
-    cout<<"3) Individual task"<<endl;
-    cout<<"4) Finish the program"<<endl;
-    cout<<"Answer: ";
+    cout << "1) Create a binary search Tree" << endl;
+    cout << "2) Calculate the average time" << endl;
+    cout << "3) Individual task" << endl;
+    cout << "4) Finish the program" << endl;
+    cout << "Answer: ";
 }
 
 void menu_2() {
-     system("cls");
-     cout<<"1) Add a Node"<<endl;
-     cout<<"2) Delete a Node"<<endl;
-     cout<<"3) Print a binary tree"<<endl;
-     cout<<"4) Find the Node"<<endl;
-     cout<<"5) Back"<< endl;
-     cout<<"Answer: ";
+    system("cls");
+    cout << "1) Add a Node" << endl;
+    cout << "2) Delete a Node" << endl;
+    cout << "3) Print a binary tree" << endl;
+    cout << "4) Find the Node" << endl;
+    cout << "5) Back" << endl;
+    cout << "Answer: ";
 }
 
 void menu_3() {
@@ -195,37 +195,62 @@ int main() {
     int answer_1 = 0;
     int value = 0;
 
+    bool f1 = true;
 
-    while (true) {
+    while (f1) {
         main_menu();
         cin >> answer_main;
 
         if (answer_main == 1) {
-            while (true) {
+
+            bool f2 = true;
+
+            while (f2) {
                 menu_2();
                 cin >> answer_1;
+
                 if (answer_1 == 1) {
                     cout << "Input value:" << endl;
-                    cin << value;
+                    cin >> value;
                     if (test.Insert(value) == true) cout << "Value add" << endl;
                     else cout << "The value is already in the tree" << endl;
                     system("pause");
-                    break;
+                    f1 = true;
                 }
+
                 else if (answer_1 == 2) {
-
+                    cout << "Value: ";
+                    cin >> value;
+                    if (test.Erase(value) == true) cout << "Value deleted" << endl;
+                    else cout << "There is no such value in the tree" << endl;
+                    system("pause");
+                    f1 = true;
                 }
+
                 else if (answer_1 == 3) {
-
+                    test.Print();
+                    system("pause");
+                    f1 = true;
                 }
+
                 else if (answer_1 == 4) {
+                    cout << "Value: ";
+                    cin >> value;
+                    if (test.Contains(value)) cout << "This element is present in the tree" << endl;
+                    else cout << "This element is NOT present in the tree" << endl;
+                    system("pause");
+                    f1 = true;
 
                 }
+
                 else if (answer_1 == 5) {
-
+                    f2 = false;
                 }
-                else{
-                    //не ломай
+
+                else {
+                    cout << "you clicked something wrong... try again" << endl;
+                    system("pause");
+                    f1 = true;
                 }
             }
         }
@@ -238,9 +263,9 @@ int main() {
         if (answer_main == 4) {
             return 0;
         }
-        //добавить что бы не ломалось все
-        
-
+        else if (answer_main != 1 && answer_main != 2 && answer_main != 3 && answer_main != 4) {
+            cout << "you clicked something WWWrong... try again" << endl;
+            system("pause");
+        }
     }
-
 }
