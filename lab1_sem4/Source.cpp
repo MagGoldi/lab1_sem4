@@ -207,8 +207,10 @@ int main() {
                 if (answer_1 == 1) {
                     cout << "Input value:" << endl;
                     cin << value;
-
-
+                    if (test.Insert(value) == true) cout << "Value add" << endl;
+                    else cout << "The value is already in the tree" << endl;
+                    system("pause");
+                    break;
                 }
                 else if (answer_1 == 2) {
 
