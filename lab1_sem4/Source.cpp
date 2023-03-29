@@ -3,6 +3,11 @@
 #include <windows.h>
 #include <locale.h>
 #include <iostream>
+#include <conio.h>
+#include <vector>
+#include <algorithm>
+#include <chrono>
+#include <iostream>
 
 #include<vector>
 
@@ -167,7 +172,6 @@ bool Tree::Erase(int x) {
     return true;
 }
 
-
 bool find_value(std::vector<int>& vector, int value) {
     for (int i = 0; i < vector.size(); i++)
     {
@@ -175,6 +179,163 @@ bool find_value(std::vector<int>& vector, int value) {
             return true;
     }
     return false;
+}
+
+size_t lcg() {
+    static size_t x = 0;
+    x = (1021 * x + 24631) % 116640;
+    return x;
+}
+void fill_tree(int n, int cycles)
+{
+    double result = 0;
+    for (int i = 0; i < cycles; i++)
+    {
+        Tree test_time;
+        auto start = std::chrono::high_resolution_clock::now();
+        for (int j = 0; j < n; j++)
+        {
+            test_time.Insert(lcg());
+        }
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "filling of binary tree: with " << n << " values and " << cycles << " cycles - " << result / cycles << " microseconds" << endl;
+}
+
+void contains_tree(int n, int cycles)
+{
+    Tree test_time;
+    for (int i = 0; i < n; i++)
+    {
+        test_time.Insert(lcg());
+    }
+    long double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        auto start = std::chrono::high_resolution_clock::now();
+        test_time.Contains(lcg());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "searching in binary tree: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
+}
+
+void insert_tree(int n, int cycles)
+{
+    Tree test_time;
+    for (int i = 0; i < n; i++)
+    {
+        test_time.Insert(lcg());
+    }
+    double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        Tree tmp = test_time;
+        auto start = std::chrono::high_resolution_clock::now();
+        tmp.Insert(lcg());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "addition in binary tree: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
+}
+void erase_tree(int n, int cycles)
+{
+    Tree test_time;
+    for (int i = 0; i < n; i++)
+    {
+        test_time.Insert(lcg());
+    }
+    double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        Tree tmp = test_time;
+        auto start = std::chrono::high_resolution_clock::now();
+        tmp.Erase(lcg());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "deleting in binary tree: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
+}
+void fill_vector(int n, int cycles)
+{
+    double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        std::vector<int> test_time(n);
+        auto start = std::chrono::high_resolution_clock::now();
+        for (int i = 0; i < n; i++)
+        {
+            test_time.push_back(lcg());
+        }
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "filling of vector: with " << n << " values and " << cycles << " cycles - " << result / cycles << " microseconds" << endl;
+}
+
+void contains_vector(int n, int cycles)
+{
+    std::vector<int> test_time(n);
+    for (int i = 0; i < n; i++)
+    {
+        test_time.push_back(lcg());
+    }
+    long double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        auto start = std::chrono::high_resolution_clock::now();
+        std::find(test_time.begin(), test_time.end(), lcg());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "searching in vector: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
+}
+
+void insert_vector(int n, int cycles)
+{
+    std::vector<int> test_time(n);
+    for (int i = 0; i < n; i++)
+    {
+        test_time.push_back(lcg());
+    }
+    double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        std::vector<int> tmp = test_time;
+        auto start = std::chrono::high_resolution_clock::now();
+        tmp.push_back(lcg());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "addition in vector: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
+}
+
+void erase_vector(int n, int cycles)
+{
+    std::vector<int> test_time(n);
+    for (int i = 0; i < n; i++)
+    {
+        test_time.push_back(lcg());
+    }
+    double result = 0;
+    for (int j = 0; j < cycles; j++)
+    {
+        std::vector<int> tmp = test_time;
+        auto start = std::chrono::high_resolution_clock::now();
+        tmp.erase(std::remove(tmp.begin(), tmp.end(), lcg()), tmp.end());
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+        result += duration.count();
+    }
+    cout << "deleting in vector: with " << n << " values and " << cycles << " cycles - " << result / cycles << " nanoseconds" << endl;
 }
 
 void main_menu()
@@ -195,10 +356,6 @@ void menu_2() {
     cout << "4) Find the Node" << endl;
     cout << "5) Back" << endl;
     cout << "Answer: ";
-}
-
-void menu_3() {
-
 }
 
 int main() {
@@ -269,6 +426,49 @@ int main() {
         }
         if (answer_main == 2) {
 
+            fill_tree(1000, 100);
+            fill_tree(10000, 100);
+            fill_tree(100000, 100);
+            cout << endl;
+            fill_vector(1000, 100);
+            fill_vector(10000, 100);
+            fill_vector(100000, 100);
+            cout << endl;
+            cout << "end fill test" << endl;
+
+            cout << endl;
+            cout << endl;
+            contains_tree(1000, 1000);
+            contains_tree(10000, 1000);
+            contains_tree(100000, 1000);
+            cout << endl;
+            contains_vector(1000, 1000);
+            contains_vector(10000, 1000);
+            contains_vector(100000, 1000);
+            cout << endl;
+            cout << endl;
+
+            insert_tree(1000, 1000);
+            insert_tree(10000, 1000);
+            insert_tree(100000, 1000);
+            cout << endl;
+            insert_vector(1000, 1000);
+            insert_vector(10000, 1000);
+            insert_vector(100000, 1000);
+            cout << endl;
+            cout << endl;
+
+            erase_tree(1000, 1000);
+            erase_tree(10000, 1000);
+            erase_tree(100000, 1000);
+            cout << endl;
+            erase_vector(1000, 1000);
+            erase_vector(10000, 1000);
+            erase_vector(100000, 1000);
+            cout << endl << endl;
+
+            system("pause");
+            f1 = true;
         }
         if (answer_main == 3) {
             std::vector<int> old_vector = { 2, 3, 3, 4, 5, 6, 5, 7 };
