@@ -181,6 +181,28 @@ bool find_value(std::vector<int>& vector, int value) {
     return false;
 }
 
+void individual_task(std::vector<int> old_vector, std::vector<int> new_vector) {
+    Tree task;
+    cout << "vector: [";
+    for (int i = 0; i < old_vector.size(); i++)
+    {
+        if (find_value(new_vector, old_vector[i]) == false && task.Insert(old_vector[i]) == false)
+        {
+            new_vector.push_back(old_vector[i]);
+        }
+        cout << old_vector[i] << ", ";
+    }
+    cout << "]" << endl;
+
+    cout << "new vector: [";
+    for (int i = 0; i < new_vector.size(); i++)
+    {
+        cout << new_vector[i] << ", ";
+    }
+    cout << "]" << endl;
+    return;
+}
+
 size_t lcg() {
     static size_t x = 0;
     x = (1021 * x + 24631) % 116640;
@@ -360,7 +382,6 @@ void menu_2() {
 
 int main() {
     Tree test;
-    Tree task;
     int answer_main = 0;
     int answer_1 = 0;
     int value = 0;
@@ -471,25 +492,9 @@ int main() {
             f1 = true;
         }
         if (answer_main == 3) {
-            std::vector<int> old_vector = { 2, 3, 3, 4, 5, 6, 5, 7 };
+            std::vector<int> old_vector = { 2, 3, 3, 3, 3, 3, 4, 5, 6, 5, 7 };
             std::vector<int> new_vector;
-            cout << "vector: [";
-            for (int i = 0; i < old_vector.size(); i++)
-            {
-                if (find_value(new_vector, old_vector[i]) == false && task.Insert(old_vector[i]) == false)
-                {
-                    new_vector.push_back(old_vector[i]);
-                }
-                cout << old_vector[i] << ", ";
-            }
-            cout << "]" << endl;
-
-            cout << "new vector: [";
-            for (int i = 0; i < new_vector.size(); i++)
-            {
-                cout << new_vector[i] << ", ";
-            }
-            cout << "]" << endl;
+            individual_task(old_vector, new_vector);
             system("pause");
             f1 = true;
         }
